@@ -1,6 +1,7 @@
 <?php
 include_once "../base_conf.php";
 header('Access-Control-Allow-Origin: *');
+$user = check_login($REQ['user_token'],$REQ['session']);
 
 if (isset($REQ['lat']) && isset($REQ['long'])) {
     $lat = $REQ['lat'];
@@ -16,7 +17,6 @@ if (isset($REQ['lat']) && isset($REQ['long'])) {
 
 //$events = fetch_all("SELECT id,title, description, address, longitude, latitude, creator_id FROM events",[]);
 foreach ($events as $event) {
-    $user = fetch_assoc("SELECT name, phone, email FROM users where id = ?", [$event['creator_id']]) ?? false;
     $api_response[] = [
         'token' => $event['token'],
         'title' => $event['title'],
