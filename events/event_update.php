@@ -9,6 +9,7 @@ $allowed_updates = [
     "description",
     "latitude",
     "longitude",
+    "starttime",
 ];
 
 $sql = "UPDATE events SET ";
