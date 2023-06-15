@@ -12,10 +12,10 @@ $start_time = $REQ['starttime']??false;
 $token = generateRandomString(25);
 
 
-if ($title&&$description&&$address&&$lat&&$long){
-    $id = insert("INSERT INTO events (token, title, description, creator_id, address, starttime, latitude, longitude) VALUES (?,?, ?, ?, ?, ?, ?, ?)", [$token, $title, $description, $user['id'], $address, $starttime, $lat, $long]);
+if ($title&&$description&&$address&&$lat&&$long&&$start_time){
+    $id = insert("INSERT INTO events (token, title, description, creator_id, address, starttime, latitude, longitude) VALUES (?,?, ?, ?, ?, ?, ?, ?)", [$token, $title, $description, $user['id'], $address, $start_time, $lat, $long]);
 }
-if(isset($id)){
+if(isset($id) && $id != 0){
     api_response(["created_time" => date("d/m-y")],201);
 }else{
     api_response([],400);
