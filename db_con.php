@@ -15,7 +15,6 @@ function db_con()
 
 function fetch_assoc($query="", $params=[]){
     $con = db_con();
-    //mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     try {
         $stmt = $con->prepare($query);
         $stmt->bind_param(str_repeat('s', count($params)), ...$params);
@@ -29,7 +28,6 @@ function fetch_assoc($query="", $params=[]){
 
 function fetch_all($query="", $params=[]){
     $con = db_con();
-    //mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     try {
         $stmt = $con->prepare($query);
         if (count($params)) {
@@ -49,7 +47,6 @@ function fetch_all($query="", $params=[]){
 
 function update($query="", $params=[]){
     $con = db_con();
-    //mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     try {
         $stmt = $con->prepare($query);
         $stmt->bind_param(str_repeat('s', count($params)), ...$params);
@@ -60,9 +57,6 @@ function update($query="", $params=[]){
 
 function insert($query="", $params=[]){
     $con = db_con();
-    //mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
-
     try {
         $stmt = $con->prepare($query);
         $stmt->bind_param(str_repeat('s', count($params)), ...$params);
@@ -74,7 +68,6 @@ function insert($query="", $params=[]){
 
 function delete($query="", $params=[]){
     $con = db_con();
-    //mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     try {
         $stmt = $con->prepare($query);
         $stmt->bind_param(str_repeat('s', count($params)), ...$params);
