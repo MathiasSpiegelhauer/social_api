@@ -5,7 +5,7 @@ header('Access-Control-Allow-Origin: *');
 $name = $REQ['name']??'';
 $phone = $REQ['phone']??'';
 $email = $REQ['email']??false;
-$password = md5($REQ['password'])??false;
+$password = hash("sha512", $REQ['password']) ??false;
 $token = generateRandomString(25);
 
 if ($email&&$password){

@@ -2,7 +2,7 @@
 include_once "../base_conf.php";
 header('Access-Control-Allow-Origin: *');
 
-$user = fetch_assoc("SELECT id,token,email,phone,name FROM users where email = ? AND password = ?", [$REQ['email'],md5($REQ['password'])])??false;
+$user = fetch_assoc("SELECT id,token,email,phone,name FROM users where email = ? AND password = ?", [$REQ['email'],hash("sha512", $REQ['password'])])??false;
 
 if ($user){
     $session_token = bin2hex(random_bytes(20));
