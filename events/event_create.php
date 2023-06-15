@@ -13,7 +13,7 @@ $token = generateRandomString(25);
 
 
 if ($title&&$description&&$address&&$lat&&$long){
-    $id = insert("INSERT INTO events (token, title, description, creator_id, address, starttime, latitude, longtitude) VALUES (?,?, ?, ?, ?, ?, ?, ?)", [$token, $title, $description, $user['id'], $address, $starttime, $lat, $long]);
+    $id = insert("INSERT INTO events (token, title, description, creator_id, address, starttime, latitude, longitude) VALUES (?,?, ?, ?, ?, ?, ?, ?)", [$token, $title, $description, $user['id'], $address, $starttime, $lat, $long]);
 }
 if(isset($id)){
     api_response(["created_time" => date("d/m-y")],201);
