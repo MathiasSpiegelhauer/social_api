@@ -1,10 +1,10 @@
 <?php
-function check_login($id,$token){
-    $user = fetch_assoc("SELECT token_exp FROM users WHERE id = ? AND token = ?", [$id,$token])['token_exp']??false;
-    if ($user && $user < date("Y-m-d H:i:s", strtotime('+10 hours'))){
-        return true;
+function check_login($token,$session){
+    $user = fetch_assoc("SELECT * FROM users WHERE token = ? AND session = ?", [$token,$session]) ?? false;
+    if ($user && $user['session_exp'] < date("Y-m-d H:i:s", strtotime('+10 hours'))){
+        return $user;
     }else{
-        api_response(["authentication failed"]);
+        api_response(["authentication failed"],401);
         die();
     }
 }

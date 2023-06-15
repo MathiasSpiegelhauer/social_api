@@ -1,18 +1,22 @@
 <?php
 include_once "../base_conf.php";
 header('Access-Control-Allow-Origin: *');
-check_login($REQ['user_id'],$REQ['token']);
+$user = check_login($REQ['user_token'],$REQ['session']);
 
 $title = $REQ['title']??false;
-$description = $REQ['description']??false;
-$creator_id = fetch_assoc("SELECT id FROM users WHERE id = ?",[$REQ['user_id']])['id']??false;
 $address = $REQ['address']??false;
-$lat = $REQ['lat']??false;
-$long = $REQ['long']??false;
+$description = $REQ['description']??false;
+$lat = $REQ['latitude']??false;
+$long = $REQ['longitude']??false;
+$token = generateRandomString(25);
 
-if ($title&&$description&&$creator_id&&$address&&$lat&&$long){
-    $id = insert("INSERT INTO events (title, description, creator_id, address, latitude, longtitude) VALUES (?, ?, ?, ?, ?, ?)", [$title, $description, $creator_id, $address, $lat, $long]);
+
+if ($title&&$description&&$address&&$lat&&$long){
+    $id = insert("INSERT INTO events (token, title, description, creator_id, address, latitude, longtitude) VALUES (?,?, ?, ?, ?, ?, ?)", [$token, $title, $description, $user['id'], $address, $lat, $long]);
 }
-
-api_response(["update_time" => date("d/m-y"),"id"=>$id??false]);
+if(isset($id)){
+    api_response(["created_time" => date("d/m-y")],201);
+}else{
+    api_response([],400);
+}
 ?>

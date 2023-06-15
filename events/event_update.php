@@ -1,14 +1,14 @@
 <?php
 include_once "../base_conf.php";
 header('Access-Control-Allow-Origin: *');
-check_login($REQ['user_id'],$REQ['token']);
+$user = check_login($REQ['user_token'],$REQ['session']);
 
 $allowed_updates = [
-    "address",
-    "lat",
-    "long",
     "title",
+    "address",
     "description",
+    "latitude",
+    "longitude",
 ];
 
 $sql = "UPDATE events SET ";
@@ -22,11 +22,10 @@ foreach ($REQ as $key => $value) {
     }
 }
 $keys = rtrim($keys, ",");
-$sql = $sql . $keys . " WHERE id = ?";
-$values_real[] = $REQ['id'];
+$sql = $sql . $keys . " WHERE token = ?";
+$values_real[] = $REQ['token'];
 
 update($sql, $values_real);
-
 
 api_response(["update_time" => date("d/m-y")]);
 ?>

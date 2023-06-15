@@ -1,3 +1,4 @@
-<?
-echo "API :)"
+<?php
+    header('Access-Control-Allow-Origin: *');
+    echo "API :)"
 ?>

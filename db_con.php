@@ -1,4 +1,4 @@
-<?
+<?php
 function db_con()
 {
     $con = mysqli_connect("mysql104.unoeuro.com","mathiasspiegelhauer_dk","rEgwkhanzDGf","mathiasspiegelhauer_dk_db_social");
@@ -25,6 +25,7 @@ function fetch_assoc($query="", $params=[]){
     }
     return $result;
 }
+
 
 function fetch_all($query="", $params=[]){
     $con = db_con();
