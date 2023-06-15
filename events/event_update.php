@@ -22,8 +22,9 @@ foreach ($REQ as $key => $value) {
     }
 }
 $keys = rtrim($keys, ",");
-$sql = $sql . $keys . " WHERE token = ?";
+$sql = $sql . $keys . " WHERE token = ? AND creator_id = ?";
 $values_real[] = $REQ['token'];
+$values_real[] = $user['id'];
 
 update($sql, $values_real);
 
